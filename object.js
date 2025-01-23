@@ -11,6 +11,8 @@ const library = {
   getApiData,
   setdataInTable,
   deleteUser,
+  editUser,
+  createUser,
 };
 
 function listsBooks() {
@@ -94,7 +96,14 @@ function setdataInTable() {
             <td>${e.updatedAt || "N/A"}</td>
             <td>
             <i class="fa fa-trash" onclick="deleteUser(${e.id})"></i>
-            <i class="fa fa-edit" onclick="EditUser(${e})"></i>
+            <i class="fa fa-edit" onclick="editUser('${[
+              e.id,
+              e.name,
+              e.email,
+              e.age,
+              e.createdAt,
+              e.updatedAt,
+            ].toString()}')"></i>
             </td>
         `;
     fragment.appendChild(row);
@@ -115,4 +124,55 @@ async function deleteUser(id) {
     });
   alert(data.message);
   this.getApiData();
+}
+async function editUser(e, bool) {
+  if (!bool) {
+    let [id, name, email, age, createdAt, updatedAt] = e.split(",");
+    document.getElementById("ID").value = id;
+    document.getElementById("Name").value = name;
+    document.getElementById("Age").value = age;
+    document.getElementById("Email").value = email;
+    document.getElementById("CreatedAt").value = createdAt;
+    document.getElementById("UpdateddAt").value = updatedAt;
+  } else {
+    let updatedData = await getInputvalues();
+    let data = await fetch(`http://localhost:5000/api/users/${updatedData.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        return data;
+      });
+    alert(data.id ? "User Updated" : "User not Updated");
+    this.getApiData();
+  }
+}
+async function createUser(id) {
+  let data = await fetch(`http://localhost:5000/api/users/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+  alert(data.message);
+  this.getApiData();
+}
+library.getApiData();
+function getInputvalues() {
+  let id = document.getElementById("ID").value;
+  let name = document.getElementById("Name").value;
+  let age = document.getElementById("Age").value;
+  let email = document.getElementById("Email").value;
+  let createdAt = document.getElementById("CreatedAt").value;
+  let updatedAt = document.getElementById("UpdateddAt").value;
+  let updatedData = { id, name, email, age, createdAt, updatedAt };
+  return updatedData;
 }
