@@ -125,47 +125,58 @@ async function deleteUser(id) {
   alert(data.message);
   this.getApiData();
 }
-async function editUser(e, bool) {
-  if (!bool) {
-    let [id, name, email, age, createdAt, updatedAt] = e.split(",");
-    document.getElementById("ID").value = id;
-    document.getElementById("Name").value = name;
-    document.getElementById("Age").value = age;
-    document.getElementById("Email").value = email;
-    document.getElementById("CreatedAt").value = createdAt;
-    document.getElementById("UpdateddAt").value = updatedAt;
+async function editUser(e, bool, create) {
+  let updatedData = await getInputvalues();
+  if (create) {
+    this.createUser({
+      name: updatedData.name,
+      email: updatedData.email,
+      age: updatedData.age,
+    });
   } else {
-    let updatedData = await getInputvalues();
-    let data = await fetch(`http://localhost:5000/api/users/${updatedData.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
-      });
-    alert(data.id ? "User Updated" : "User not Updated");
-    this.getApiData();
+    if (!bool) {
+      let [id, name, email, age, createdAt, updatedAt] = e.split(",");
+      document.getElementById("ID").value = id;
+      document.getElementById("Name").value = name;
+      document.getElementById("Age").value = age;
+      document.getElementById("Email").value = email;
+      document.getElementById("CreatedAt").value = createdAt;
+      document.getElementById("UpdateddAt").value = updatedAt;
+    } else {
+      let data = await fetch(
+        `http://localhost:5000/api/users/${updatedData.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          return data;
+        });
+      alert(data.id ? "User Updated" : "User not Updated");
+      this.getApiData();
+    }
   }
 }
-async function createUser(id) {
-  let data = await fetch(`http://localhost:5000/api/users/${id}`, {
+async function createUser(e) {
+  let data = await fetch(`http://localhost:5000/api/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(e),
   })
     .then((response) => response.json())
     .then((data) => {
       return data;
     });
-  alert(data.message);
+  alert(data.id ? "Created" : "Not Created");
   this.getApiData();
 }
-library.getApiData();
 function getInputvalues() {
   let id = document.getElementById("ID").value;
   let name = document.getElementById("Name").value;
@@ -176,3 +187,34 @@ function getInputvalues() {
   let updatedData = { id, name, email, age, createdAt, updatedAt };
   return updatedData;
 }
+function toggleInputs(mode) {
+  // Get the inputs
+  const idField = document.getElementById("ID");
+  const createdAtField = document.getElementById("CreatedAt");
+  const updatedAtField = document.getElementById("UpdateddAt");
+
+  if (mode === "edit") {
+    // Show edit-specific fields
+    idField.hidden = true;
+    createdAtField.hidden = true;
+    updatedAtField.hidden = true;
+    document.getElementById("Submit").style.display = "inline-block";
+    document.getElementById("Create").style.display = "none";
+  } else if (mode === "new") {
+    // Hide edit-specific fields
+    idField.hidden = false;
+    createdAtField.hidden = false;
+    updatedAtField.hidden = false;
+    document.getElementById("Submit").style.display = "none";
+    document.getElementById("Create").style.display = "inline-block";
+  }
+}
+function clearInputs() {
+  document.getElementById("ID").value = "";
+  document.getElementById("Name").value = "";
+  document.getElementById("Age").value = "";
+  document.getElementById("Email").value = "";
+  document.getElementById("CreatedAt").value = "";
+  document.getElementById("UpdateddAt").value = "";
+}
+library.getApiData();
