@@ -1,7 +1,9 @@
 const library = {
   name: "Sat Japan Library",
+  JsInterview: [],
   books: [],
   users: [],
+  SetInterviewQuestions,
   addBooks,
   findBook,
   removeBook,
@@ -13,6 +15,7 @@ const library = {
   deleteUser,
   editUser,
   createUser,
+  recursion,
 };
 
 function listsBooks() {
@@ -217,4 +220,40 @@ function clearInputs() {
   document.getElementById("CreatedAt").value = "";
   document.getElementById("UpdateddAt").value = "";
 }
-library.getApiData();
+// library.getApiData();
+function recursion(...arg) {
+  console.log(arg);
+}
+function SetInterviewQuestions() {
+  let html = "";
+  console.log(JsonData);
+  JsonData.forEach((e, i) => {
+    html += `<div class="card">
+              <h1>${++i}:${e.question || "none"}</h1>
+              <p>${e.answer || "none"}</p>
+              ${e.code ? `<div class="codeblock">${e.code}</div>` : ""}
+            </div>`;
+  });
+  let data = document.getElementById("card_items");
+  data.innerHTML = html;
+}
+let JsonData = [
+  {
+    question: "What is Lexical Scope or Lexical Environment",
+    answer: `A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope
+along with references to all outer scopes. It is also known as the lexical scope.`,
+  },
+  {
+    question: `“var” has no block scope`,
+    answer: `Variables, declared with var, are either function-scoped or global-scoped. They are visible through blocks.
+For instance:`,
+    code: `<code class="language-javascript"><code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token keyword">var</code> test <code class="token operator">=</code> <code class="token boolean">true</code><code class="token punctuation">;</code> <code class="token comment">// use "var" instead of "let"</code>
+<code class="token punctuation">}</code><em class="block-highlight">
+<code class="token function">alert</code><code class="token punctuation">(</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true, the variable lives after if</code></em></code>`,
+  },
+  {
+    question: `Global object`,
+    answer: `The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.In a browser it is named window, for Node.js it is global, for other environments it may have another name.`,
+  },
+];

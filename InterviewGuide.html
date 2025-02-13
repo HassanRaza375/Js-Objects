@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.5;
+        font-size: 1rem;
+      }
+      h1 {
+        font-weight: 600;
+      }
+      p {
+        font-weight: 500;
+      }
+      .container {
+        padding-block: 15px;
+        max-width: 1320px;
+        margin: 0 auto;
+        height: 100vh;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .card {
+        border-radius: 12px;
+        background-color: #303030;
+        padding: 28px;
+        color: #ffffff;
+        flex: 1 1 calc(33.33% - 70px);
+        min-width: 300px;
+      }
+      .py-4 {
+        padding-block: 1rem 2rem;
+      }
+      .get_questions {
+        padding: 10px;
+        border: 1px solid #303030;
+        color: #ffffff;
+        border-radius: 12px;
+        background-color: #303030;
+        cursor: pointer;
+      }
+      .codeblock{
+        margin-top: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row py-4">
+        <button class="get_questions" onclick="library.SetInterviewQuestions()">
+          Get Questions
+        </button>
+      </div>
+      <div class="row" id="card_items"></div>
+    </div>
+    <script src="object.js"></script>
+    <script>
+        SetInterviewQuestions()
+    </script>
+  </body>
+</html>
