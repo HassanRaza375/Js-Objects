@@ -225,6 +225,17 @@ function recursion(...arg) {
   console.log(arg);
 }
 function SetInterviewQuestions() {
+  let data = document.getElementById("card_items");
+  data.innerHTML = `<div id="container">
+  <div class="spinner">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>`;
   let html = "";
   console.log(JsonData);
   JsonData.forEach((e, i) => {
@@ -234,8 +245,9 @@ function SetInterviewQuestions() {
               ${e.code ? `<div class="codeblock">${e.code}</div>` : ""}
             </div>`;
   });
-  let data = document.getElementById("card_items");
-  data.innerHTML = html;
+  setTimeout(() => {
+    data.innerHTML = html;
+  }, 2000);
 }
 let JsonData = [
   {
@@ -255,5 +267,13 @@ For instance:`,
   {
     question: `Global object`,
     answer: `The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.In a browser it is named window, for Node.js it is global, for other environments it may have another name.`,
+  },
+  {
+    question: `Function object`,
+    answer: `A good way to imagine functions is as callable “action objects”. We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.`,
+    code: `<code class="language-javascript"><code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
+  <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Hi"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
+<code class="token punctuation">}</code>
+<code class="token function">alert</code><code class="token punctuation">(</code>sayHi<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// sayHi</code></code>`,
   },
 ];
