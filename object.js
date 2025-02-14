@@ -265,6 +265,11 @@ For instance:`,
 <code class="token function">alert</code><code class="token punctuation">(</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true, the variable lives after if</code></em></code>`,
   },
   {
+    question: `Closure`,
+    answer: `Usually, a function remembers where it was born in the special property [[Environment]]. It references the Lexical Environment from where it’s created (we covered that in the chapter Variable scope, closure).`,
+    code: `But when a function is created using new Function, its [[Environment]] is set to reference not the current Lexical Environment, but the global one.`,
+  },
+  {
     question: `Global object`,
     answer: `The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.In a browser it is named window, for Node.js it is global, for other environments it may have another name.`,
   },
