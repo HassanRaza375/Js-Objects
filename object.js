@@ -18,7 +18,7 @@ const library = {
   createUser,
   recursion,
 };
-getApiData()
+getApiData();
 function listsBooks() {
   let b = this.books;
   return b;
@@ -321,49 +321,171 @@ function filterdata($this) {
 let JsonData = [
   {
     title: "lexical",
-    question: "What is Lexical Scope or Lexical Environment",
-    answer: `A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope
-along with references to all outer scopes. It is also known as the lexical scope.`,
+    question: "What is Lexical Scope or Lexical Environment?",
+    answer: `A lexical environment in JavaScript is a data structure that stores variables and functions defined in the current scope along with references to all outer scopes. It is also known as the lexical scope.`,
   },
   {
     title: "var",
-    question: `“var” has no block scope`,
-    answer: `Variables, declared with var, are either function-scoped or global-scoped. They are visible through blocks.
-For instance:`,
-    code: `<code class="language-javascript"><code class="token keyword">if</code> <code class="token punctuation">(</code><code class="token boolean">true</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
-  <code class="token keyword">var</code> test <code class="token operator">=</code> <code class="token boolean">true</code><code class="token punctuation">;</code> <code class="token comment">// use "var" instead of "let"</code>
-<code class="token punctuation">}</code><em class="block-highlight">
-<code class="token function">alert</code><code class="token punctuation">(</code>test<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// true, the variable lives after if</code></em></code>`,
+    question: "What is the scope of 'var' in JavaScript?",
+    answer: `Variables declared with 'var' are either function-scoped or global-scoped. They do not have block scope, meaning they are accessible outside of blocks such as loops or conditionals.`,
+    code: `if (true) {
+  var test = true;
+}
+console.log(test); // true`,
   },
   {
     title: "closure",
-    question: `Closure`,
-    answer: `Usually, a function remembers where it was born in the special property [[Environment]]. It references the Lexical Environment from where it’s created (we covered that in the chapter Variable scope, closure).`,
-    code: `But when a function is created using new Function, its [[Environment]] is set to reference not the current Lexical Environment, but the global one.`,
+    question: "What is a Closure in JavaScript?",
+    answer: `A closure is a function that has access to its outer function's variables, even after the outer function has returned. It remembers the environment in which it was created.`,
+    code: `function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+const counter = outer();
+counter(); // 1
+counter(); // 2`,
   },
   {
-    title: "global object",
-    question: `Global object`,
-    answer: `The global object provides variables and functions that are available anywhere. By default, those that are built into the language or the environment.In a browser it is named window, for Node.js it is global, for other environments it may have another name.`,
+    title: "event loop",
+    question: "What is the Event Loop in JavaScript?",
+    answer: `The event loop is a mechanism that continuously checks the call stack and callback queue. If the call stack is empty, it dequeues a callback from the queue and executes it.`,
+    code: `console.log('Start');
+setTimeout(() => console.log('Timeout'), 0);
+console.log('End');
+// Output: Start, End, Timeout`,
   },
   {
-    title: "function object",
-    question: `Function object`,
-    answer: `A good way to imagine functions is as callable “action objects”. We can not only call them, but also treat them as objects: add/remove properties, pass by reference etc.`,
-    code: `<code class="language-javascript"><code class="token keyword">function</code> <code class="token function">sayHi</code><code class="token punctuation">(</code><code class="token punctuation">)</code> <code class="token punctuation">{</code>
-  <code class="token function">alert</code><code class="token punctuation">(</code><code class="token string">"Hi"</code><code class="token punctuation">)</code><code class="token punctuation">;</code>
-<code class="token punctuation">}</code>
-<code class="token function">alert</code><code class="token punctuation">(</code>sayHi<code class="token punctuation">.</code>name<code class="token punctuation">)</code><code class="token punctuation">;</code> <code class="token comment">// sayHi</code></code>`,
+    title: "promise",
+    question: "What are Promises in JavaScript?",
+    answer: `Promises are used to handle asynchronous operations. A Promise is an object representing the eventual completion or failure of an asynchronous operation.`,
+    code: `const promise = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Done!"), 1000);
+});
+promise.then(result => console.log(result)); // Output: Done!`,
   },
   {
-    title: "call function",
-    question: `Call function`,
-    answer: `
-    Invokes the function with this explicitly set to thisArg.
-    Passes arguments one by one.
-    call: Arguments are passed individually.
-    The only syntax difference between call and apply is that call expects a list of arguments, while apply takes an array-like object with them.
-    `,
-    code: `function greet(greeting, punctuation) {console.log($'{greeting}, $'{this.name}$'{punctuation}');}const person = { name: "Alice" };greet.call(person, "Hello", "!"); // Output: "Hello, Alice!"`,
+    title: "async await",
+    question: "What is 'async/await' in JavaScript?",
+    answer: `The 'async/await' syntax simplifies handling asynchronous operations. 'async' makes a function return a Promise, and 'await' pauses execution until the Promise resolves.`,
+    code: `async function fetchData() {
+  const response = await fetch('https://api.example.com/data');
+  const data = await response.json();
+  console.log(data);
+}`,
+  },
+  {
+    title: "hoisting",
+    question: "What is Hoisting in JavaScript?",
+    answer: `Hoisting is JavaScript's default behavior of moving declarations to the top of their scope during the compile phase. This applies to both variables and functions.`,
+    code: `console.log(a); // undefined
+var a = 10;`,
+  },
+  {
+    title: "prototype",
+    question: "What is Prototype in JavaScript?",
+    answer: `Every JavaScript object has a prototype. A prototype is also an object. All JavaScript objects inherit their properties and methods from their prototype.`,
+    code: `function Person(name) {
+  this.name = name;
+}
+Person.prototype.sayHello = function() {
+  console.log('Hello, ' + this.name);
+};
+const person = new Person('Alice');
+person.sayHello(); // Hello, Alice`,
+  },
+  {
+    title: "this keyword",
+    question: "What does 'this' refer to in JavaScript?",
+    answer: `The value of 'this' depends on how a function is called. In general, it refers to the object that is currently executing the code.`,
+    code: `const obj = {
+  name: 'Alice',
+  greet: function() {
+    console.log('Hello, ' + this.name);
+  }
+};
+obj.greet(); // Output: Hello, Alice`,
+  },
+  {
+    title: "call, apply, bind",
+    question: "What are 'call', 'apply', and 'bind' methods?",
+    answer: `'call' and 'apply' invoke a function with a specified 'this' context. 'bind' returns a new function with 'this' set.`,
+    code: `function greet(greeting) {
+  console.log(greeting + ', ' + this.name);
+}
+const user = { name: 'Alice' };
+greet.call(user, 'Hello'); // Output: Hello, Alice
+greet.apply(user, ['Hi']); // Output: Hi, Alice
+const boundGreet = greet.bind(user, 'Hey');
+boundGreet(); // Output: Hey, Alice`,
+  },
+  {
+    title: "destructuring",
+    question: "What is Destructuring in JavaScript?",
+    answer: `Destructuring is a syntax for unpacking values from arrays or properties from objects into distinct variables.`,
+    code: `const obj = { name: 'Alice', age: 25 };
+const { name, age } = obj;
+console.log(name, age); // Alice 25`,
+  },
+  {
+    title: "spread operator",
+    question: "What is the Spread Operator?",
+    answer: `The spread operator (...) allows an iterable (like an array or object) to expand where multiple elements or properties are expected.`,
+    code: `const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];
+console.log(arr2); // [1, 2, 3, 4, 5]`,
+  },
+  {
+    title: "currying",
+    question: "What is Currying in JavaScript?",
+    answer: `Currying is a technique of converting a function with multiple arguments into a sequence of functions, each taking a single argument.`,
+    code: `function curry(f) {
+  return function(a) {
+    return function(b) {
+      return f(a, b);
+    };
+  };
+}
+const sum = (a, b) => a + b;
+const curriedSum = curry(sum);
+console.log(curriedSum(2)(3)); // 5`,
+  },
+  {
+    title: "debounce",
+    question: "What is Debouncing?",
+    answer: `Debouncing ensures that a function is executed only after a specified time has elapsed since the last time it was invoked.`,
+    code: `function debounce(func, delay) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), delay);
+  };
+}`,
+  },
+  {
+    title: "throttle",
+    question: "What is Throttling?",
+    answer: `Throttling ensures that a function is executed at most once in a specified time interval.`,
+    code: `function throttle(func, limit) {
+  let lastFunc;
+  let lastRan;
+  return function(...args) {
+    const context = this;
+    if (!lastRan) {
+      func.apply(context, args);
+      lastRan = Date.now();
+    } else {
+      clearTimeout(lastFunc);
+      lastFunc = setTimeout(function() {
+        if (Date.now() - lastRan >= limit) {
+          func.apply(context, args);
+          lastRan = Date.now();
+        }
+      }, limit - (Date.now() - lastRan));
+    }
+  };
+}`,
   },
 ];
