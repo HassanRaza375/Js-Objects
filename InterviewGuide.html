@@ -50,6 +50,13 @@
       .codeblock{
         margin-top: 12px;
       }
+      .search{
+        height: 32px;
+        width: 100%;
+        max-width: 500px;
+        border: 1px solid blueviolet;
+        border-radius: 6px;
+      }
     </style>
   </head>
   <body>
@@ -58,6 +65,9 @@
         <button class="get_questions" onclick="library.SetInterviewQuestions()">
           Get Questions
         </button>
+        <div>
+          <input type="text" class="search" oninput="filterdata(this.value)" value="">
+        </div>
       </div>
       <div class="row" id="card_items"></div>
     </div>

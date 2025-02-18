@@ -66,6 +66,13 @@
         background-color: royalblue;
         cursor: pointer;
       }
+      .search{
+        height: 44px;
+        width: 100%;
+        max-width: 500px;
+        border: 1px solid rgb(226, 43, 92);
+        border-radius: 6px;
+      }
     </style>
   </head>
   <body>
@@ -87,6 +94,7 @@
       <button class="get_data" onclick="library.getApiData()">
         Get Api User Data <i class="fa fa-refresh w3-large w3-spin"></i>
       </button>
+      <input type="text" value="" oninput="getFilteredUsers(this.value)" class="search">
       <div>
         <table width="100%">
           <thead>
