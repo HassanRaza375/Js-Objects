@@ -11,3 +11,68 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+  td,
+  th {
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+  }
+}
+.get_data {
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: antiquewhite;
+  cursor: pointer;
+}
+.material-icons {
+  cursor: pointer;
+}
+.container {
+  max-width: 1200px;
+  padding-block: 15px;
+  margin: 0 auto;
+}
+.fa-trash {
+  cursor: pointer;
+  color: red;
+}
+.inputs_tables_edit {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 10px;
+}
+.inputs_tables_edit input {
+  padding: 10px;
+  flex: 0 1 33.33%;
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 5px;
+}
+.inputs_tables_edit button{
+  padding: 10px;
+  border: 1px solid goldenrod;
+  border-radius: 5px;
+  color: white;
+  background-color: royalblue;
+  cursor: pointer;
+}
+.search{
+  height: 44px;
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid rgb(226, 43, 92);
+  border-radius: 6px;
+}
+.input-button{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
