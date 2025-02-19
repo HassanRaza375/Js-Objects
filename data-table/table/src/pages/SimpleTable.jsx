@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchTable from '../components/DataSearch';
+import { useRef } from 'react';
 const SimpleTable = () => {
     const [tableData, setTableData] = useState([]);
+    const copydata = useRef()
 
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/users');
             setTableData(response.data);
+            copydata.value = response.data
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -17,10 +20,8 @@ const SimpleTable = () => {
     }, []);
 
     const getFilteredUsers = (searchString) => {
-        console.log("table data", tableData);
-
         if (searchString === '') {
-            setTableData(tableData);
+            setTableData(copydata.value);
             return;
         }
 
