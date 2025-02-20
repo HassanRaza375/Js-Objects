@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import SearchTable from '../components/DataSearch';
+import TableFrom from '../components/TableForm';
 import { useRef } from 'react';
 const SimpleTable = () => {
     const [tableData, setTableData] = useState([]);
+    const [editData, setEdit] = useState("");
     const copydata = useRef()
 
+    useEffect(() => {
+        fetchData();
+    }, []);
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:5000/api/users');
@@ -15,9 +20,6 @@ const SimpleTable = () => {
             console.error('Error fetching data:', error);
         }
     };
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     const getFilteredUsers = (searchString) => {
         if (searchString === '') {
@@ -34,10 +36,19 @@ const SimpleTable = () => {
 
         setTableData(filteredData);
     };
-
+    const DeleteUser = async (id) => {
+        let data = await axios.delete(`http://localhost:5000/api/users/${id}`)
+        alert(data.data.message);
+        fetchData();
+    }
+    const EditUser = (objectUser)=>{
+        setEdit(objectUser)
+        console.log(editData);
+    }
     return (
         <>
             <div className='container'>
+                <TableFrom editdataFunc={EditUser}/>
                 <div className='input-button'>
                     <button className="get_data" onClick={fetchData}>
                         Get Api User Data
@@ -70,7 +81,7 @@ const SimpleTable = () => {
                                     <td>{user.updatedAt}</td>
                                     <td>
                                         <button>Edit</button>
-                                        <button>Delete</button>
+                                        <button onClick={() => DeleteUser(user.id)}>Delete</button>
                                     </td>
                                 </tr>
                             ))
