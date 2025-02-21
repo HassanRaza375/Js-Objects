@@ -5,7 +5,7 @@ import TableFrom from '../components/TableForm';
 import { useRef } from 'react';
 const SimpleTable = () => {
     const [tableData, setTableData] = useState([]);
-    const [editData, setEdit] = useState("");
+    const [editData, setEdit] = useState({});
     const copydata = useRef()
 
     useEffect(() => {
@@ -41,14 +41,22 @@ const SimpleTable = () => {
         alert(data.data.message);
         fetchData();
     }
-    const EditUser = (objectUser)=>{
-        setEdit(objectUser)
-        console.log(editData);
+    const EditUser = async (objectUser, bool) => {
+        if (bool) {
+            const res = await axios.put(`http://localhost:5000/api/users/${objectUser.id}`, { ...objectUser })
+            if (res.data.id) {
+                alert("Edited", res.data.name)
+                fetchData();
+            }
+        }
+        else {
+            setEdit(objectUser)
+        }
     }
     return (
         <>
             <div className='container'>
-                <TableFrom editdataFunc={EditUser}/>
+                <TableFrom DataUser={editData} SetEditFunc={setEdit} Efunct={EditUser} />
                 <div className='input-button'>
                     <button className="get_data" onClick={fetchData}>
                         Get Api User Data
@@ -80,7 +88,7 @@ const SimpleTable = () => {
                                     <td>{user.createdAt}</td>
                                     <td>{user.updatedAt}</td>
                                     <td>
-                                        <button>Edit</button>
+                                        <button onClick={() => EditUser(user)}>Edit</button>
                                         <button onClick={() => DeleteUser(user.id)}>Delete</button>
                                     </td>
                                 </tr>
