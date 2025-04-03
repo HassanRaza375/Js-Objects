@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box</title>
+    <style>
+      .box {
+        height: 200px;
+        width: 200px;
+        background-color: rgb(255, 255, 0);
+        border: 5px solid black;
+        position: relative;
+        padding: 4px;
+        user-select: none;
+        cursor: pointer;
+      }
+      .box span {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background-color: red;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+      }
+      .container {
+        max-width: 1024px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      .dle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="dle">
+        <div class="box">
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+          <span id="ball"></span>
+        </div>
+      </div>
+    </div>
+    <script>
+      const ball = document.getElementById("ball");
+      document
+        .getElementsByClassName("box")[0]
+        .addEventListener("click", function (e) {
+          console.log(e);
+            
+          console.log("X: " + e.clientX + " Y: " + e.clientY);
+          ball.style.top = e.clientY + "px";
+          ball.style.left = e.clientX + "px";
+        });
+    </script>
+  </body>
+</html>

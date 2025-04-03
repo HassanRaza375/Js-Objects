@@ -58,7 +58,7 @@
         background-color: white;
         border-radius: 5px;
       }
-      .inputs_tables_edit button{
+      .inputs_tables_edit button {
         padding: 10px;
         border: 1px solid goldenrod;
         border-radius: 5px;
@@ -66,7 +66,7 @@
         background-color: royalblue;
         cursor: pointer;
       }
-      .search{
+      .search {
         height: 44px;
         width: 100%;
         max-width: 500px;
@@ -78,26 +78,71 @@
   <body>
     <div class="container">
       <a href="/Js-Objects/InterviewGuide.html">Interview Questions</a>
-      <h2>Js Prep </h2>
+      <h2>Js Prep</h2>
       <p>
-        <label for="edit_u">Edit</label> <input type="radio" id="edit_u" name="selection" onclick="toggleInputs('edit')" checked> 
-        <label for="new_u">New</label> <input type="radio" id="new_u" name="selection" onclick="toggleInputs('new')">
+        <label for="edit_u">Edit</label>
+        <input
+          type="radio"
+          id="edit_u"
+          name="selection"
+          onclick="toggleInputs('edit')"
+          checked
+        />
+        <label for="new_u">New</label>
+        <input
+          type="radio"
+          id="new_u"
+          name="selection"
+          onclick="toggleInputs('new')"
+        />
       </p>
-        <div class="inputs_tables_edit">
-          <input type="number" hidden placeholder="ID" value="" id="ID"  required/>
-          <input type="text" placeholder="Name" value="" id="Name" required/>
-          <input type="number" placeholder="Age" value="" id="Age" required/>
-          <input type="email" placeholder="Email" value="" id="Email"  required/>
-          <input type="email" hidden placeholder="createdat" value="" id="CreatedAt" required/>
-          <input type="email" hidden placeholder="updateddat" value="" id="UpdateddAt"  required/>
-          <button onclick="editUser(null,true)" id="Submit">Submit</button>
-          <button onclick="editUser(null,null,true)" id="Create" style="display: none;">Create</button>
-          <button onclick="clearInputs()">Reset</button>
-        </div>
+      <div class="inputs_tables_edit">
+        <input
+          type="number"
+          hidden
+          placeholder="ID"
+          value=""
+          id="ID"
+          required
+        />
+        <input type="text" placeholder="Name" value="" id="Name" required />
+        <input type="number" placeholder="Age" value="" id="Age" required />
+        <input type="email" placeholder="Email" value="" id="Email" required />
+        <input
+          type="email"
+          hidden
+          placeholder="createdat"
+          value=""
+          id="CreatedAt"
+          required
+        />
+        <input
+          type="email"
+          hidden
+          placeholder="updateddat"
+          value=""
+          id="UpdateddAt"
+          required
+        />
+        <button onclick="editUser(null,true)" id="Submit">Submit</button>
+        <button
+          onclick="editUser(null,null,true)"
+          id="Create"
+          style="display: none"
+        >
+          Create
+        </button>
+        <button onclick="clearInputs()">Reset</button>
+      </div>
       <button class="get_data" onclick="library.getApiData()">
         Get Api User Data <i class="fa fa-refresh w3-large w3-spin"></i>
       </button>
-      <input type="text" value="" oninput="getFilteredUsers(this.value)" class="search">
+      <input
+        type="text"
+        value=""
+        oninput="getFilteredUsers(this.value)"
+        class="search"
+      />
       <div>
         <table width="100%">
           <thead>
@@ -117,5 +162,9 @@
       </div>
     </div>
     <script src="object.js"></script>
+    <script type="module">
+      import {sayHi} from './module2.js';
+      document.body.innerHTML = sayHi('John');
+    </script>
   </body>
 </html>
