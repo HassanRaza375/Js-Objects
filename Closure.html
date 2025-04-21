@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Closure</title>
+  </head>
+  <body>
+    <h1>Closure Example</h1>
+    <script>
+      function createCounter(val) {
+        let count = val;
+        return {
+          increment: () => ++count,
+          decrement: () => --count,
+          getCount: () => count,
+        };
+      }
+      let checkClosuerA = createCounter(0);
+
+      console.log("A", checkClosuerA.increment()); // 1
+      console.log("A", checkClosuerA.getCount()); // 1
+      console.log("A", checkClosuerA.decrement()); // 0
+
+      let checkClosuerB = createCounter(0);
+      console.log("B", checkClosuerB.increment()); // 1
+      console.log("B", checkClosuerB.getCount()); // 1
+      console.log("B", checkClosuerB.decrement()); // 0
+    </script>
+  </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <title>Wow</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .ds.m {
+        margin-top: 30px;
+      }
+      .ds {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .ds div {
+        padding: 20px;
+        width: 20%;
+        height: 20%;
+        background-color: white;
+        border: 1px solid rgb(0, 170, 255);
+        margin: 3px;
+      }
+      .container {
+        padding-block: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="ds">
+        <div
+          class="wow animate__animated animate__backInUp"
+          data-wow-duration="2s"
+          data-wow-delay="3s"
+        >
+          wow js animate__slideInLeft
+        </div>
+        <div
+          class="wow animate__animated animate__backInDown"
+          data-wow-duration="2s"
+          data-wow-delay="3s"
+        >
+          wow js animate__backInDown
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__backInUp"
+          data-wow-duration="2s"
+          data-wow-delay="4s"
+        >
+          wow js animate__slideInLeft
+        </div>
+        <div
+          class="wow animate__animated animate__backInRight"
+          data-wow-duration="2s"
+          data-wow-delay="4s"
+        >
+          wow js animate__backInRight
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__backOutDown"
+          data-wow-duration="2s"
+          data-wow-delay="5s"
+        >
+          wow js animate__backOutDown
+        </div>
+        <div
+          class="wow animate__animated animate__backOutLeft"
+          data-wow-duration="2s"
+          data-wow-delay="5s"
+        >
+          wow js animate__backOutLeft
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__bounceIn"
+          data-wow-duration="2s"
+          data-wow-delay="6s"
+        >
+          wow js animate__bounceIn
+        </div>
+        <div
+          class="wow animate__animated animate__bounceInDown"
+          data-wow-duration="2s"
+          data-wow-delay="6s"
+        >
+          wow js animate__bounceInDown
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__bounceInLeft"
+          data-wow-duration="2s"
+          data-wow-delay="7s"
+        >
+          wow js animate__bounceInLeft
+        </div>
+        <div
+          class="wow animate__animated animate__bounceInRight"
+          data-wow-duration="2s"
+          data-wow-delay="7s"
+        >
+          wow js animate__bounceInRight
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__bounceInUp"
+          data-wow-duration="2s"
+          data-wow-delay="8s"
+        >
+          wow js animate__bounceInUp
+        </div>
+        <div
+          class="wow animate__animated animate__bounceOut"
+          data-wow-duration="2s"
+          data-wow-delay="8s"
+        >
+          wow js animate__bounceOut
+        </div>
+      </div>
+      <div class="ds m">
+        <div
+          class="wow animate__animated animate__flipInX"
+          data-wow-duration="2s"
+          data-wow-delay="8s"
+        >
+          wow js animate__flipInX
+        </div>
+        <div
+          class="wow animate__animated animate__flipOutX"
+          data-wow-duration="2s"
+          data-wow-delay="8s"
+        >
+          wow js animate__flipOutX
+        </div>
+      </div>
+    </div>
+    <script src="/jquery.min.js"></script>
+    <script src="/wow.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        new WOW().init();
+      });
+    </script>
+  </body>
+</html>
