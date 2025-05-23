@@ -37,36 +37,94 @@
         align-items: center;
         justify-content: center;
       }
+      #field {
+        width: 200px;
+        border: 10px groove black;
+        background-color: #00ff00;
+        position: relative;
+        cursor: pointer;
+      }
+
+      #ball {
+        position: absolute;
+        transition: 1s all;
+        cursor: pointer;
+      }
     </style>
   </head>
 
   <body>
     <div class="container">
-      <div class="dle">
-        <div class="box">
+      <div>
+        <div>
+          Position X:<span id="position_x"></span> Position Y:<span
+            id="position_y"
+          ></span>
+        </div>
+        <div id="field">
+          <img src="https://en.js.cx/clipart/ball.svg" id="ball" /> . . . . . .
           . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
           . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
           . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
           . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-          <span id="ball"></span>
+          . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
         </div>
       </div>
     </div>
     <script>
       const ball = document.getElementById("ball");
-      document
-        .getElementsByClassName("box")[0]
-        .addEventListener("click", function (e) {
-          console.log(e);
-            
-          console.log("X: " + e.clientX + " Y: " + e.clientY);
-          ball.style.top = e.clientY + "px";
-          ball.style.left = e.clientX + "px";
-        });
+      const field = document.getElementById("field");
+      const position_y = document.getElementById("position_y");
+      const position_x = document.getElementById("position_x");
+      function getDocumentValues() {
+        const coord = ball.getBoundingClientRect();
+        console.log(coord);
+        position_x.innerText = coord.left;
+        position_y.innerText = coord.top;
+      }
+      field.addEventListener("click", function (event) {
+        // window-relative field coordinates
+        let fieldCoords = this.getBoundingClientRect();
+
+        // the ball has position:absolute, the field: position:relative
+        // so ball coordinates are relative to the field inner left-upper corner
+        let ballCoords = {
+          top:
+            event.clientY -
+            fieldCoords.top -
+            field.clientTop -
+            ball.clientHeight / 2,
+          left:
+            event.clientX -
+            fieldCoords.left -
+            field.clientLeft -
+            ball.clientWidth / 2,
+        };
+
+        // prevent crossing the top field boundary
+        if (ballCoords.top < 0) ballCoords.top = 0;
+
+        // prevent crossing the left field boundary
+        if (ballCoords.left < 0) ballCoords.left = 0;
+
+        // // prevent crossing the right field boundary
+        if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+          ballCoords.left = field.clientWidth - ball.clientWidth;
+        }
+
+        // prevent crossing the bottom field boundary
+        if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+          ballCoords.top = field.clientHeight - ball.clientHeight;
+        }
+
+        ball.style.left = ballCoords.left + "px";
+        ball.style.top = ballCoords.top + "px";
+      });
+
+      // ball.style.left =
+      //   Math.round(field.clientWidth / 2 - ball.offsetWidth / 2) + "px";
+      // ball.style.top =
+      //   Math.round(field.clientHeight / 2 - ball.offsetHeight / 2) + "px";
     </script>
   </body>
 </html>
